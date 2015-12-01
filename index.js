@@ -44,6 +44,7 @@ class SideMenu extends Component {
     this.prevLeft = 0;
 
     this.state = {
+      opacity:0,
       shouldRenderMenu: false,
       left: new Animated.Value(0),
     };
@@ -70,6 +71,7 @@ class SideMenu extends Component {
 
   componentDidMount() {
     this.setState({
+      opacity:0,
       shouldRenderMenu: true,
     });
 
@@ -169,6 +171,8 @@ class SideMenu extends Component {
       .start();
 
     this.prevLeft = openOffset;
+
+    this.setState({opacity:1});
 
     if (!this.isOpen) {
       this.isOpen = true;
@@ -274,7 +278,7 @@ class SideMenu extends Component {
      * If menu is ready to be rendered
      */
     if (this.state.shouldRenderMenu) {
-      menu = <View style={styles.menu}>{this.props.menu}</View>;
+      menu = <View style={[styles.menu,{opacity:this.state.opacity}]}>{this.props.menu}</View>;
     }
 
     return (
