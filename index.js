@@ -44,7 +44,7 @@ class SideMenu extends Component {
     this.prevLeft = 0;
 
     this.state = {
-      opacity:0,
+      opacity: this.props.opacity,
       shouldRenderMenu: false,
       left: new Animated.Value(0),
     };
@@ -71,7 +71,7 @@ class SideMenu extends Component {
 
   componentDidMount() {
     this.setState({
-      opacity:0,
+      // opacity:0,
       shouldRenderMenu: true,
     });
 
@@ -173,7 +173,9 @@ class SideMenu extends Component {
 
     this.prevLeft = openOffset;
 
-    this.setState({opacity:1});
+    if (this.props.opacity !== 1 && this.state.opacity !== 1) {
+      this.setState({opacity:1});
+    }
 
     if (!this.isOpen) {
       this.isOpen = true;
@@ -336,6 +338,7 @@ SideMenu.defaultProps = {
     );
   },
   defaultOpen: false,
+  opacity:1,
 };
 
 module.exports = SideMenu;
